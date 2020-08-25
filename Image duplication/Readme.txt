@@ -1,3 +1,7 @@
+Aim:
+To create 5 Duplicate images for the single image and store the image details in a json file
+
+
 Packages used : OS, JSON, PIL
 OS used to Iterate through the local folder to get the files
 JSON used to convert the dictionary to JSON
