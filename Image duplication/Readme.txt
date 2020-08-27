@@ -2,10 +2,10 @@ Aim:
 To create 5 Duplicate images for the single image and store the image details in a json file
 
 
-Packages used : OS, JSON, PIL
+Packages used : OS, JSON, shutil
 OS used to Iterate through the local folder to get the files
 JSON used to convert the dictionary to JSON
-PIL is used to get the Image and perform Image operations
+Shutil is used to copy the file
 
 
 Method : imagesave
