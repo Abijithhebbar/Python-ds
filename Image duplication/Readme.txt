@@ -22,4 +22,5 @@ New Files added:
 Metadata.py : Got the metadata of the files with hachoir package.
 TryMultiprocessing.py : Tried multiprocessing but was unable to get the desired result.
 Demo.py : Added all the methods that I have tried to get the Metadata of the file
+TryMultithreading.py : Tried the multithreading and it worked
 
