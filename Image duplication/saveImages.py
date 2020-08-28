@@ -8,7 +8,7 @@ source = 'D:\\Python-ds\\Image scrapping'
 """
 Giives the destination path
 """
-destination = 'D:\\Python-ds\\Python-ds\\Image duplication\\Pictures'
+destination = 'D:\\Python-ds\\Image duplication\\Pictures'
 
 """
 Creates the dictionary

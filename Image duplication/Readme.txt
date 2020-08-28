@@ -17,3 +17,9 @@ It also appends the dictionary with the Required Image details
 This programs checks for all the image files in the given folder and duplicates the images 5 times.
 After the duplication is done all the details are added to the JSON and save that JSON locally.
 
+
+New Files added:
+Metadata.py : Got the metadata of the files with hachoir package.
+TryMultiprocessing.py : Tried multiprocessing but was unable to get the desired result.
+Demo.py : Added all the methods that I have tried to get the Metadata of the file
+
