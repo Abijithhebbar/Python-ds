@@ -3,11 +3,11 @@ import hachoir
 import os
 import json
 import time
-from multiprocessing import Pool, current_process
+from concurrent.futures import ThreadPoolExecutor
 source = "D:\\Python-ds\\Images\\"
 exe = "hachoir-metadata"
 """
-Noting the start time to get the execution time
+Notes the Start time
 """
 start_time = time.time()
 """
@@ -41,19 +41,19 @@ def imageMetadata(filename):
 Prints the metadata to json file
 """
 def printjson():
-    with open("jsonfile4.json", "a") as file:
+    with open("jsonfile5.json", "a") as file:
         json.dump(MetaData, file)
+
 
 
 if __name__ == '__main__':
     processes = []
     for filename in os.listdir(source):
         processes.append(filename)
-    pool = Pool() # Initializing the pool 
-    pool.map(imageMetadata, processes) # Starting the process pool
-    pool.close()
-    pool.join()
-    print("--- %s seconds ---" %(time.time() - start_time)) # Displays the execution time
-    
+
+
+    with ThreadPoolExecutor(max_workers = 6) as executor: # starts the Threadpool executor with 6 threads
+      results = executor.map(imageMetadata, processes) # Maping the process to the threadpool
+    print("--- %s seconds ---" %(time.time() - start_time)) # To get the execution time
 
 

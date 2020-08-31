@@ -2,6 +2,11 @@ import subprocess
 import hachoir
 import os
 import json
+import time
+"""
+startTime
+"""
+start_time = time.time()
 """
 Source path
 """
@@ -44,4 +49,6 @@ writing to the json file
 """
 with open("jsonfile2.json", "w") as file:
     json.dump(MetaData, file)
+
+print("--- %s seconds ---" %(time.time() - start_time)) # To display the execution time of the program.
 
