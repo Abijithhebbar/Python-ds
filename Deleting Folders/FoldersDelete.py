@@ -24,3 +24,4 @@ for i in subfolders:
 	stat_result = os.stat(i)
 	if stat_result.st_mtime < old:
 		shutil.rmtree(i)
+print("--- %s Seconds ---" %(time.time() - now)) # to get the execution time
