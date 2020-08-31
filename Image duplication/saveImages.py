@@ -1,6 +1,7 @@
 import os
 import json
 import shutil
+from tqdm import tqdm
 """
 Gives the folder path
 """
@@ -59,7 +60,7 @@ def imagesave(filename, ext):
 """
 Loops through the given directory to iterate through all the files
 """
-for filename in os.listdir(source):
+for filename in tqdm(os.listdir(source)):
     extension = (".jpg", ".jpeg", ".png", ".gif") # creating a tuple with the valid extensions
     if filename.endswith(extension):
         getExtension = filename.split(".")
