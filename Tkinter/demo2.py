@@ -25,7 +25,7 @@ class Application(tk.Frame):
                               command=self.master.destroy)
         self.quit.pack(side="bottom")
     def func(self):
-        print("New Button Clicked!!")
+        print("New Button Clicked")
 
 root = tk.Tk()
 app = Application(master=root)
