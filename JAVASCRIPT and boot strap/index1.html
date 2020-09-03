@@ -1,0 +1,63 @@
+<html>
+<head>
+  <title>MINE SWEEPER</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="container well">
+    <h1><center><b>MINE SWEEPER Game</b></center></h1>
+    <form id="name">
+First Name : <input type="text" id="fname" name="fname" required >
+<br>
+<br>
+Last Name : <input type="text" id="lname" required >
+<br>
+<br>
+<button id="play" style = "display : block" type="button" onclick="create()">Wanna Play!!!</button>
+    </form>
+    <div class="grid-container" id="one">
+</div>
+   <div id="chance1">
+    <p id = chances>
+        
+      </p>
+      
+        <img id = "img">
+        <img id="img1">
+     
+      <button style = "display: none;" id = "refresh" type = "submit" onclick="resetfun()">
+        Excited!!! Wanna Play Again :)
+      </button>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 well" id="comments">
+      <h3> <b><center>Results</center></b></h3>
+      <table style="width:100%" id="table">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th> 
+    <th>Result</th>
+    <th>Attempts</th>
+  </tr>
+  <tr>
+    <td id="tc1"></td>
+    <td id="tc2"></td>
+    <td id="tc3"></td>
+    <td id="tc4"></td>
+  </tr>
+
+
+</table>
+    </div>
+  </div>
+  
+  
+  
+</body>
+<script src="script1.js"></script>
+</html>
