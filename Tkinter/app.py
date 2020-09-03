@@ -21,13 +21,16 @@ urls = urls[7:]
 
 def download(urlstart):
     updatestr = mainUrl + urlstart #updating the url to get into the date
-    year, month, date = urls[7].split(".")
+    year, month, date = urlstart.split(".")
     yearpath = os.path.join(parentDirectory,year)
-    os.mkdir(yearpath)
+    if( not os.path.exists(yearpath)):
+        os.mkdir(yearpath)
     monthpath = os.path.join(yearpath, month)
-    os.mkdir(monthpath)
+    if( not os.path.exists(monthpath)):
+        os.mkdir(monthpath)
     datepath = os.path.join(monthpath, date)
-    os.mkdir(datepath)
+    if (not  os.path.exists(datepath)):
+        os.mkdir(datepath)
     abi = requests.get(updatestr)
     content1 = abi.content
     soup1 = BeautifulSoup(content1, features = "lxml")
