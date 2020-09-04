@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import urllib.request as req
 import requests
 import os
-from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import Pool
 
 parentDirectory = "D:\\Python-ds\\Python-ds\\Tkinter" #Parent directory
