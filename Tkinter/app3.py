@@ -3,6 +3,7 @@ import urllib.request as req
 import requests
 import os
 from concurrent.futures import ThreadPoolExecutor
+import glob
 # from multiprocessing import Pool
 
 parentDirectory = "D:\\Python-ds\\Python-ds\\Tkinter\\Check" #Parent directory
@@ -12,6 +13,7 @@ print("Please enter the date")
 date = input()
 date = date.replace("-", ".")
 date = date + "/"
+dic = {}
 r = requests.get(mainUrl)
 content0 = r.content
 soup = BeautifulSoup(content0, features = "lxml")
@@ -42,33 +44,32 @@ def download(urlstart):
     content1 = abi.content
     soup1 = BeautifulSoup(content1, features = "lxml")
     href = soup1.find_all('a')
-    imageurl = []
     j = 0
     for h in href:
-        i = str(h).split("\"")
-        imageurl.append(i[1])
+        i = str(h).split("\"") #getting the image name
         imagelink = updatestr + i[1] # getting the image
-        j += 1
         ext = ".jpg"
         if ext in imagelink:
             os.chdir(datepath)
             req.urlretrieve(imagelink, i[1])
-    extension = "*" +ext
-    print(extension)
-    folderpath = os.path.join(datepath, extension)
-    print(folderpath)
-    print(glob.glob(folderpath))
-    if(urlstart not in dic):
-        dic[urlstart] = datepath
-        dic[urlstart] = glob.glob(folderpath)
+    countofimages = str(datepath)
+    countImages = countofimages.replace("\\", "/")
+    countImages = countImages + "/*"
+    count = os.path.normpath(countImages)
+    ImagesCount = glob.glob(count)
+    print(len(ImagesCount))
+    print(str(updatestr))
+    if urlstart not in dic:
+        dic[urlstart] = "Number of Images : " + str(len(ImagesCount)) + " Url of the images : " + str(updatestr)
     else:
-        dic[urlstart] = glob.glob(folderpath)
+        dic[urlstart] = "Number of Images : " + str(len(ImagesCount)) + " Url of the images : " + str(updatestr)
 
 
 
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers = 12) as executor: # starts the Threadpool executor with 6 threads
       results = executor.map(download, urls) # Maping the process to the threadpool
+    print(dic)
 
 
 # if __name__ == '__main__':
