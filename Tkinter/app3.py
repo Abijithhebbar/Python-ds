@@ -4,7 +4,6 @@ import requests
 import os
 from concurrent.futures import ThreadPoolExecutor
 import glob
-# from multiprocessing import Pool
 
 parentDirectory = "D:\\Python-ds\\Python-ds\\Tkinter\\Check" #Parent directory
 mainUrl = "https://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/" # main url from which we get the data
@@ -61,7 +60,9 @@ def download(urlstart):
     print(str(updatestr))
     if urlstart not in dic:
         dic[urlstart] = []
+        dic[urlstart].append(urlstart)
         dic[urlstart].append(str(updatestr))
+        dic[urlstart].append(len(ImagesCount))
     else:
         dic[urlstart].append(len(ImagesCount))
 
@@ -72,9 +73,3 @@ if __name__ == '__main__':
       results = executor.map(download, urls) # Maping the process to the threadpool
     print(dic)
 
-
-# if __name__ == '__main__':
-#     pool = Pool() # Initializing the pool 
-#     pool.map(download, urls) # Starting the process pool
-#     pool.close()
-#     pool.join()
