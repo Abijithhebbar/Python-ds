@@ -4,7 +4,14 @@ import requests
 import os
 from concurrent.futures import ThreadPoolExecutor
 import glob
-# from multiprocessing import Pool
+import mysql.connector
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="abijith123",
+  database="mydatabase"
+)
+mycursor = mydb.cursor()
 
 parentDirectory = "D:\\Python-ds\\Python-ds\\Tkinter\\Check" #Parent directory
 mainUrl = "https://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/" # main url from which we get the data
@@ -18,6 +25,22 @@ r = requests.get(mainUrl)
 content0 = r.content
 soup = BeautifulSoup(content0, features = "lxml")
 images = soup.find_all('a')
+
+
+sql = "SELECT id FROM data"
+mycursor.execute(sql)
+myresult = mycursor.fetchall()
+checklist = []
+for i in myresult:
+    checklist.append(list(i))
+checklist2= []
+for sublist in checklist:
+    for val in sublist:
+        checklist2.append(val)
+
+
+
+
 urls =[]
 for image in images:
     href = str(image).split(">")
@@ -25,9 +48,12 @@ for image in images:
     urls.append(urladd[0])
 start = urls.index(date)
 urls = urls[start:]
-
+for ele in checklist2:
+    if ele in urls:
+        urls.remove(ele)
 
 def download(urlstart):
+    print(urlstart)
     updatestr = mainUrl + urlstart #updating the url to get into the date
     year, month, day = urlstart.split(".")
 
@@ -57,24 +83,25 @@ def download(urlstart):
     countImages = countImages + "/*"
     count = os.path.normpath(countImages)
     ImagesCount = glob.glob(count)
-    print(len(ImagesCount))
-    print(str(updatestr))
     if urlstart not in dic:
         dic[urlstart] = []
+        dic[urlstart].append(urlstart)
         dic[urlstart].append(str(updatestr))
+        dic[urlstart].append(len(ImagesCount))
     else:
         dic[urlstart].append(len(ImagesCount))
 
 
 
 if __name__ == '__main__':
-    with ThreadPoolExecutor(max_workers = 12) as executor: # starts the Threadpool executor with 6 threads
+    with ThreadPoolExecutor(max_workers = 4) as executor: # starts the Threadpool executor with 6 threads
       results = executor.map(download, urls) # Maping the process to the threadpool
-    print(dic)
+    print(dic.values())
+    sql='''\
+    INSERT INTO data (id, imageurl, images)
+    VALUES (%s, %s, %s)
+    '''
+    mycursor.executemany(sql, dic.values())
+    mydb.commit()
 
 
-# if __name__ == '__main__':
-#     pool = Pool() # Initializing the pool 
-#     pool.map(download, urls) # Starting the process pool
-#     pool.close()
-#     pool.join()
