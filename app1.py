@@ -19,7 +19,6 @@ def main():
     """
     print("enter the date")
     dateinp = input()
-    formatedDate = datetime.strptime(dateinp, '%Y-%m-%d')
     print("Enter the web address")
     global url 
     url = input()
