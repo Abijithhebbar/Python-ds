@@ -22,7 +22,11 @@ def main():
     print("Enter the web address")
     global url 
     url = input()
-    scrapePage(dateinp, url)
+    if(requests.get(url)):
+        print("it is a url")
+        scrapePage(dateinp, url)
+    else:
+        print("you have not entered url")
 
 
 
