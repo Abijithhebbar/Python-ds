@@ -59,8 +59,9 @@ def scrapePage(dateinp, url):
         datestart = topdate.replace(".", "-")
         datestart = datestart[:-1]
         startdate1 = datetime.strptime(datestart,'%Y-%m-%d')
-
+        startdate1 = startdate1 + timedelta(days = 1)
         delta = enddate - startdate1
+
         for i in range(delta.days + 1):
             notpresentday = startdate1 + timedelta(days = i)
             print(f"Data not available for : {notpresentday}")
@@ -82,12 +83,13 @@ def scrapePage(dateinp, url):
 
         #         dates = datetime.strptime(val, '%Y-%m-%d')
         #         toplist.append(dates)
+        # toplist[0] = toplist[0] + timedelta(days = 1)
         # delta = dateformatofnotdwonloaded - toplist[0]
         # updatedlist = []
         # if dateformatofnotdwonloaded > toplist[0]:
         #   delta = dateformatofnotdwonloaded - toplist[0]
         #   for i in range(delta.days + 1):
-        #       addeddays = li1[0] + timedelta(days=i)
+        #       addeddays = toplist[0] + timedelta(days=i)
         #       addeddays = str(addeddays)
         #       addeddays = addeddays[0:10]
         #       addeddays = addeddays.replace("-", ".")
